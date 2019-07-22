@@ -1,0 +1,43 @@
+class Solution {
+    public int thirdMax(int[] nums) {
+        if (nums.length==1)
+            return nums[0];
+        else if (nums.length == 2)
+            return Math.max(nums[0],nums[1]);
+        else
+        {
+            //when (nums.length>2)
+            // HAVE INITIALIZED THESE VARIABLES AS FLOAT BECAUSE ONE OF THE TEST CASES CONTAINS Integer.MIN_VALUE in its
+            // its input which causes discrepancy in the result...
+            
+            float max = Float.NEGATIVE_INFINITY;
+            float sec = Float.NEGATIVE_INFINITY;
+            float tm = Float.NEGATIVE_INFINITY;
+            for (int i =0; i<nums.length;i++)
+            {
+                if (nums[i]>tm)
+                {
+                    if (nums[i]>max)
+                    {
+                    tm = sec;
+                    sec = max;
+                    max = nums[i];
+                    }    
+                else if (nums[i] > sec && nums[i]!=max)
+                {
+                    tm = sec;
+                    sec = nums[i];
+                }
+                else if (nums[i]!=sec && nums[i]!=max)
+                {
+                    tm = nums[i];
+                }
+            }
+            }
+            if (tm!= Float.NEGATIVE_INFINITY && tm!=sec && sec!=max)
+                return (int)tm;
+            else
+                return (int) max;
+        }
+    }
+}
